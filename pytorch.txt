@@ -1,0 +1,23 @@
+1.
+layers 的改变一定和 hidden 互相配合
+layers 变多的时候， hidden的第一个维度也要按比例增加
+在seq2seq里，可以单纯复制一下 encoder 的最后 hidden 即可
+建议写单独的创建初始hidden函数。
+
+2.
+cannot assign module before Module.__init__() call  这种报错
+一般是因为没有继承超类 super(Name, self).__init__()
+
+3.
+embedding导入外部向量好像默认是 doubleTensor，往各种东西里扔容易出问题
+建议使用前换成floatTensor
+
+4.
+如果cuda，模型和数据都要换成cuda，不然类型错误。
+建议多使用 if USE_CUDA: ...
+
+5.
+编程风格：所有的张量，都一律写成 seq*rpw*col 三维的，约定俗成，用时再squeeze。
+
+
+
